@@ -30,7 +30,7 @@ exports.getAllTours = async (req, res) => {
       query = query.sort(sortBy);
       // sort('price ratingsAverage')
     } else {
-      query = query.sort('-createdAt');
+      query = query.sort('-createdAt _id');
     }
 
     // 3) Field limiting
@@ -39,6 +39,21 @@ exports.getAllTours = async (req, res) => {
       query = query.select(fields);
     } else {
       query = query.select('-__v');
+    }
+
+    // 4) Pagination
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    //page=2&limit=10
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numTours = await Tour.countDocuments();
+      // eslint-disable-next-line no-unused-expressions
+      if (skip >= numTours)
+        throw new Error('This page does not exist');
     }
 
     // EXECUTE QUERY
