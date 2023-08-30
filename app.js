@@ -26,19 +26,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // set Security HTTP headers
 // For the leaflet script and openstreetmap images not to be blocked by the CSP of Helmet
-// app.use(
-//   helmet.contentSecurityPolicy({
-//     directives: {
-//       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-//       'script-src': ["'self'", 'https://unpkg.com'],
-//       'img-src': [
-//         "'self'",
-//         'data:',
-//         'https://*.tile.openstreetmap.org'
-//       ]
-//     }
-//   })
-// );
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      'script-src': ["'self'", 'https://unpkg.com'],
+      'img-src': [
+        "'self'",
+        'data:',
+        'https://*.tile.openstreetmap.org'
+      ]
+    }
+  })
+);
 
 if (process.env.NODE_ENV === 'devlopment') {
   app.use(morgan('dev'));
