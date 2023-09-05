@@ -12,6 +12,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -30,12 +31,17 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      'script-src': ["'self'", 'https://unpkg.com'],
+      'script-src': [
+        "'self'",
+        'https://unpkg.com',
+        'https://js.stripe.com'
+      ],
       'img-src': [
         "'self'",
         'data:',
         'https://*.tile.openstreetmap.org'
-      ]
+      ],
+      frameSrc: ["'self'", 'https://js.stripe.com']
     }
   })
 );
@@ -94,6 +100,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 app.all('*', (req, res, next) => {
   next(
