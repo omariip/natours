@@ -13,12 +13,6 @@ module.exports = class Email {
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
       // Brevo
-      console.log(
-        process.env.BREVO_HOST,
-        process.env.BREVO_PORT,
-        process.env.BREVO_LOGIN,
-        process.env.BREVO_PASSWORD
-      );
       return nodemailer.createTransport({
         service: 'Brevo',
         host: process.env.BREVO_HOST,
