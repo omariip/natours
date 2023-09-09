@@ -35,7 +35,7 @@ export const logout = async () => {
     if ((res.data.status = 'success'))
       // location.reload(true);
       // window.location = 'http://127.0.0.1:3000';
-      window.location.assign('http://127.0.0.1:3000');
+      // window.location.assign('http://127.0.0.1:3000');
   } catch (err) {
     console.log(err.response);
     showAlert('error', 'Error logging out! Try again.');
