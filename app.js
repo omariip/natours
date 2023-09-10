@@ -7,7 +7,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
@@ -71,18 +70,10 @@ const limiter = rateLimit({
 
 app.use('/api', limiter);
 
-app.use((req, res, next) => {
-  if (req.originalUrl === '/webhook-checkout') {
-    next();
-  } else {
-    bodyParser.json()(req, res, next);
-  }
-});
-
 // Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
 app.post(
   '/webhook-checkout',
-  bodyParser.raw({ type: 'application/json' }),
+  express.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 );
 
