@@ -22,11 +22,11 @@ A Full-Stack project for viewing and booking different tours. The back end is a 
 
 ## Screenshots
 <p align="center">
-  <img src="public/img/natours1.png" width="800" />
-  <img src="public/img/natours2.png" width="800" />
-  <img src="public/img/natours3.png" width="800" />
-  <img src="public/img/natours4.png" width="800" />
-  <img src="public/img/natours5.png" width="800" />
+  <img src="public/img/natours1.jpg" width="800" />
+  <img src="public/img/natours2.jpg" width="800" />
+  <img src="public/img/natours3.jpg" width="800" />
+  <img src="public/img/natours4.jpg" width="800" />
+  <img src="public/img/natours5.jpg" width="800" />
 
 
 </p>
